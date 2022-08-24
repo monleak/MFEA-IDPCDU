@@ -42,7 +42,7 @@ namespace MFEA_IDPCDU.util.io
             }
             for(int i = 0; i < graph.Nodes.Count; i++)
             {
-                graph.Nodes[i].Out_Edge.Sort(); //Sắp xếp theo id của node đích (mặc định)
+                graph.Nodes[i].Out_Edge.Sort(); //Sắp xếp theo id của node đích và sắp xếp theo cost (mặc định)
             }
             return graph;
         }

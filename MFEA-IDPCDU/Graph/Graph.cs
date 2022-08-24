@@ -7,12 +7,12 @@ using System.Collections;
 
 namespace MFEA_IDPCDU.Graph
 {
-    internal class Graph
+    public class Graph
     {
         public List<Node> Nodes;
         public int N;
         public int Domain;
-        public int Node_s;
+        public int Node_s; // id node được đánh bắt đầu từ 1,2,...
         public int Node_t;
 
         public Graph()

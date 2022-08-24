@@ -8,14 +8,14 @@ using MFEA_IDPCDU.Graph;
 
 namespace MFEA_IDPCDU.basic
 {
-    internal class Individual
+    public class Individual
     {
         private static int counter = 0;
 
-        MFEA_IDPCDU.Graph.Graph graph;
-        int Individual_Id;
-        int[] Priority;
-        int[] Out_Edge_Index;
+        public Graph.Graph graph;
+        public int Individual_Id;
+        public int[] Priority;
+        public int[] Out_Edge_Index;
 
         public Individual(Graph.Graph new_graph)
         {
@@ -45,28 +45,11 @@ namespace MFEA_IDPCDU.basic
 
             for (int i = 0; i < this.graph.N; i++)
             {
-                int max_Out_Edge = 0;
-                int count_Out_Edge = 0;
-                int old_ID = -1;
-                for(int j =0;j< this.graph.Nodes[i].Out_Edge.Count; j++)
-                {
-                    if(old_ID == -1 || this.graph.Nodes[i].Out_Edge[j].id_destination == old_ID)
-                    {
-                        if(old_ID == -1 ) old_ID = this.graph.Nodes[i].Out_Edge[j].id_destination;
-                        count_Out_Edge++;
-                    }
-                    else
-                    {
-                        old_ID = this.graph.Nodes[i].Out_Edge[j].id_destination;
-                        if (max_Out_Edge < count_Out_Edge) max_Out_Edge = count_Out_Edge;
-                        count_Out_Edge = 1; // = 0  sau đó tăng 1 đơn vị
-                    }
-                }
                 // = random trong khoảng từ 1 đến max out edge
-                if (max_Out_Edge == 0) 
+                if (this.graph.Nodes[i].Out_Edge.Count == 0) 
                     this.Out_Edge_Index[i] = -1;
                 else 
-                    this.Out_Edge_Index[i] = random.Next(1, max_Out_Edge);
+                    this.Out_Edge_Index[i] = random.Next(1, this.graph.Nodes[i].Out_Edge.Count);
             }
         }
     }

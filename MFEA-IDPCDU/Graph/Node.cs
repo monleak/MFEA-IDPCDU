@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace MFEA_IDPCDU.Graph
 {
-    internal class Node
+    public class Node
     {
         public int id;
         public int max_Out_Edge;

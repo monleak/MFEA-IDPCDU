@@ -10,7 +10,7 @@ namespace MFEA_IDPCDU.Graph
     { 
         public int id_source; //id node nguồn
         public int id_destination; //id nút đích
-        public double Weight;
+        public int Weight;
         public int domain;
 
         public int CompareTo(Edge compareEdge)
@@ -18,6 +18,8 @@ namespace MFEA_IDPCDU.Graph
             // A null value means that this object is greater.
             if (compareEdge == null)
                 return 1;
+            if (this.id_destination == compareEdge.id_destination)
+                return this.Weight.CompareTo(compareEdge.Weight);
             else
                 return this.id_destination.CompareTo(compareEdge.id_destination);
         }
