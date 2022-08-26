@@ -49,5 +49,21 @@ namespace MFEA_IDPCDU.basic
                     this.Out_Edge_Index[i] = Params.random.Next(1, Params.USS_S[i]);
             }
         }
+        public void printIndividual()
+        {
+            Console.WriteLine(this.Individual_Id);
+            Console.Write("Priority: ");
+            foreach (int i in this.Priority)
+            {
+                Console.Write(i+" ");
+            }
+            Console.Write("\n");
+            Console.Write("Out_Edge_Index: ");
+            foreach (int i in this.Out_Edge_Index)
+            {
+                Console.Write(i + " ");
+            }
+            Console.Write("\n");
+        }
     }
 }

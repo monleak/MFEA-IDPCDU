@@ -7,6 +7,7 @@ using MFEA_IDPCDU.util.io;
 using MFEA_IDPCDU.basic;
 using MFEA_IDPCDU.Graph;
 using MFEA_IDPCDU.Growing_Path_Algorithm;
+using MFEA_IDPCDU.util.crossover;
 using System.IO;
 
 namespace MFEA_IDPCDU.main
@@ -42,18 +43,22 @@ namespace MFEA_IDPCDU.main
                 }
             }
 
-            for (int seed = 1;seed <= 30; seed++)
+            for (int seed = 30;seed <= 30; seed++)
             {
                 Params.random = new Random(seed);
 
-                Individual test = new Individual();
-                test.randomInit();
-                List<Edge> temp = GPA.runGPA(test, 20);
-                foreach(Edge e in temp)
+                Individual parent1 = new Individual();
+                parent1.randomInit();
+                parent1.printIndividual();
+                Individual parent2 = new Individual();
+                parent2.randomInit();
+                parent2.printIndividual();
+
+                List<Individual> temp = Crossover.runCrossover(parent1,parent2);
+                foreach(Individual child in temp)
                 {
-                    Console.Write(e.id_source + " " + e.id_destination + "|");
+                    child.printIndividual();
                 }
-                Console.Write("\n");
             }
         }
     }
