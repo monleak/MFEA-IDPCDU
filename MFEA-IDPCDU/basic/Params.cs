@@ -13,6 +13,8 @@ namespace MFEA_IDPCDU.basic
         public static int USS_D = 0; //Số miền trong không gian chung
         public static int[] USS_S; //Số lượng "cạnh nối ra" trong không gian chung
 
+        public static int sizePop = 100; //Số lượng cá thể mỗi quần thể
+
         public static List<Graph.Graph> List_graph = new List<Graph.Graph>();
 
         public static String DATA_SET1_PATH = "..\\..\\..\\..\\Data\\set1";

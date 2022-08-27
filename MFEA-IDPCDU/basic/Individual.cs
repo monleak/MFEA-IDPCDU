@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using MFEA_IDPCDU.Graph;
+using MFEA_IDPCDU.Growing_Path_Algorithm;
 
 namespace MFEA_IDPCDU.basic
 {
@@ -15,6 +16,8 @@ namespace MFEA_IDPCDU.basic
         public int Individual_Id;
         public int[] Priority;
         public int[] Out_Edge_Index;
+
+        public int cost; //cost được tính trên task chính
 
         public Individual()
         {

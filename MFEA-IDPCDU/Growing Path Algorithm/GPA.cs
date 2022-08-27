@@ -111,5 +111,16 @@ namespace MFEA_IDPCDU.Growing_Path_Algorithm
 
             return p;
         }
+        public static int calCost(List<Edge> a)
+        {
+            int sum = 0;
+            if (a.Count == 0) return int.MaxValue;
+
+            for(int i = 0; i < a.Count; i++)
+            {
+                sum += a[i].Weight;
+            }
+            return sum;
+        }
     }
 }
