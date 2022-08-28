@@ -47,17 +47,11 @@ namespace MFEA_IDPCDU.main
             {
                 Params.random = new Random(seed);
 
-                Individual parent1 = new Individual();
-                parent1.randomInit();
-                parent1.printIndividual();
-                Individual parent2 = new Individual();
-                parent2.randomInit();
-                parent2.printIndividual();
-
-                List<Individual> temp = Crossover.runCrossover(parent1,parent2);
-                foreach(Individual child in temp)
+                MFEA_Population pop = new MFEA_Population(0);
+                pop.randomInit();
+                foreach(Individual indiv in pop.individuals)
                 {
-                    child.printIndividual();
+                    indiv.printIndividual();
                 }
             }
         }

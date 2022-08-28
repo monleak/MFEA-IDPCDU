@@ -7,26 +7,39 @@ using MFEA_IDPCDU.Growing_Path_Algorithm;
 
 namespace MFEA_IDPCDU.basic
 {
-    internal class MFEA_Population
+    public class MFEA_Population
     {
-        List<Individual> individuals; //Danh sách cá thể
-        Individual best; //Cá thể tốt nhất
-        int task;
+        public List<Individual> individuals; //Danh sách cá thể
+        public Individual best; //Cá thể tốt nhất
+        public int task;
 
-        public MFEA_Population()
+        public MFEA_Population(int task)
         {
-            individuals = new List<Individual>();
-            best = new Individual();
+            this.individuals = new List<Individual>();
+            this.task = task;
         }
         public void randomInit()
         {
             this.individuals.Clear();
-            for(int i = 0; i < Params.sizePop; i++)
+            for(int i = 0; i < Params.MAX_POP_SIZE; i++)
             {
-                Individual indiv = new Individual();
+                Individual indiv = new Individual(task);
                 indiv.randomInit();
-                indiv.cost = GPA.calCost(GPA.runGPA(indiv, task));
                 individuals.Add(indiv);
+            }
+        }
+        public void update()
+        {
+            //Sắp xếp cá thể trong quần thể
+            this.individuals.Sort();
+            //Chọn cá thể tốt nhất
+            if(best == null || best.cost > this.individuals[0].cost)
+                this.best = this.individuals[0];
+            //Loại bỏ những cá thể tồi
+            int plan_pop_size = Params.MAX_POP_SIZE;
+            while(this.individuals.Count > plan_pop_size)
+            {
+                this.individuals.RemoveAt(this.individuals.Count - 1);
             }
         }
     }

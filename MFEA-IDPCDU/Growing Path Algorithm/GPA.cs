@@ -22,19 +22,19 @@ namespace MFEA_IDPCDU.Growing_Path_Algorithm
             }
             return false;
         }
-        public static List<Edge> runGPA(Individual individual, int task)
+        public static List<Edge> runGPA(int[] Priority, int[] Out_Edge_Index, int task)
         {
             //Decode từ không gian chung về không gian riêng để tìm đường đi
             //Mỗi task có 1 đồ thị riêng nằm trong Params.List_graph
-            int[] Priority = new int[Params.List_graph[task].N];
-            int[] Out_Edge_Index = new int[Params.List_graph[task].N];
+            int[] decodePriority = new int[Params.List_graph[task].N];
+            int[] decodeOut_Edge_Index = new int[Params.List_graph[task].N];
             int dem = 0;
-            for(int i=0;i< individual.Priority.Length; i++)
+            for(int i=0;i< Priority.Length; i++)
             {
-                if (individual.Priority[i] <= Params.List_graph[task].N)
+                if (Priority[i] <= Params.List_graph[task].N)
                 {
-                    Priority[dem] = individual.Priority[i];
-                    Out_Edge_Index[dem] = individual.Out_Edge_Index[i];
+                    decodePriority[dem] = Priority[i];
+                    decodeOut_Edge_Index[dem] = Out_Edge_Index[i];
                     dem++;
                 }
             }
@@ -73,13 +73,13 @@ namespace MFEA_IDPCDU.Growing_Path_Algorithm
                 }
                 int v = -1; //id node kế tiếp
                 int max_Priority = -1;
-                for (int i = 0; i < Priority.Length; i++)
+                for (int i = 0; i < decodePriority.Length; i++)
                 {
-                    if (max_Priority < Priority[i] && visited[i] == false && checkListInt(Out_Node,i+1))
+                    if (max_Priority < decodePriority[i] && visited[i] == false && checkListInt(Out_Node,i+1))
                     {
                         //Tìm node có độ ưu tiên cao nhất và có cạnh nối với curr thuộc Adj_curr
                         // Node chưa từng được thăm
-                        max_Priority = Priority[i];
+                        max_Priority = decodePriority[i];
                         v = i+1;
                     }
                 }
@@ -97,7 +97,7 @@ namespace MFEA_IDPCDU.Growing_Path_Algorithm
                         E_curr_v.Add(Adj_curr[i]);
                     }
                 }
-                int k = Out_Edge_Index[v - 1] % E_curr_v.Count;
+                int k = decodeOut_Edge_Index[v - 1] % E_curr_v.Count;
                 p.Add(E_curr_v[k]);
                 int d2 = E_curr_v[k].domain;
                 if(d != -1 && d2 != d)
@@ -120,6 +120,8 @@ namespace MFEA_IDPCDU.Growing_Path_Algorithm
             {
                 sum += a[i].Weight;
             }
+
+            Params.countEvals++; //Tăng số lượng đánh giá lên 1
             return sum;
         }
     }

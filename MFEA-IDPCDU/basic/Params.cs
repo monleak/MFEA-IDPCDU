@@ -9,11 +9,17 @@ namespace MFEA_IDPCDU.basic
     internal class Params
     {
         public static Random random;
+
+        public static int countEvals = 0; //Đếm số lần đánh giá
+        public static int maxEvals; //Số lần đánh giá tối đa
+
         public static int USS_N = 0; //Số node trong không gian chung
         public static int USS_D = 0; //Số miền trong không gian chung
         public static int[] USS_S; //Số lượng "cạnh nối ra" trong không gian chung
 
-        public static int sizePop = 100; //Số lượng cá thể mỗi quần thể
+        public static int MAX_POP_SIZE = 100; //Số lượng cá thể mỗi quần thể
+        public static int MIN_POP_SIZE = 5; //Số cá thể tối thiểu mỗi tác vụ
+        public static int MAX_EVALS_PER_TASK = 100000;
 
         public static List<Graph.Graph> List_graph = new List<Graph.Graph>();
 
