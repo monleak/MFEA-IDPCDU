@@ -8,6 +8,7 @@ using MFEA_IDPCDU.basic;
 using MFEA_IDPCDU.Graph;
 using MFEA_IDPCDU.Growing_Path_Algorithm;
 using MFEA_IDPCDU.util.crossover;
+using MFEA_IDPCDU.core;
 using System.IO;
 
 namespace MFEA_IDPCDU.main
@@ -16,42 +17,19 @@ namespace MFEA_IDPCDU.main
     {
         public static void Main(string[] args)
         {
-            //Đọc file và lấy list đồ thị
-            string[] filePaths = Directory.GetFiles(Params.DATA_SET1_PATH, "*.idpc", SearchOption.TopDirectoryOnly);
-            for (int i = 0; i < filePaths.Length; i++)
-            {
-                Graph.Graph graph = DataIO.ReadFile(filePaths[i]);
-                Params.List_graph.Add(graph);
-            }
-
-            //Duyệt các đồ thị để lấy thuộc tính cho không gian chung
-            for (int i = 0; i < Params.List_graph.Count; i++)
-            {
-                if (Params.USS_N < Params.List_graph[i].N) Params.USS_N = Params.List_graph[i].N;
-                if (Params.USS_D < Params.List_graph[i].Domain) Params.USS_D = Params.List_graph[i].Domain;
-            }
-            Params.USS_S = new int[Params.USS_N];
-            for (int node = 0; node < Params.USS_S.Length; node++)
-            {
-                for (int i = 0; i < Params.List_graph.Count; i++)
-                {
-                    if (Params.List_graph[i].N < node + 1) continue; //Nếu đồ thị không chưa node đang xét thì bỏ qua
-                    if (Params.USS_S[node] < Params.List_graph[i].Nodes[node].Out_Edge.Count)
-                    {
-                        Params.USS_S[node] = Params.List_graph[i].Nodes[node].Out_Edge.Count;
-                    }
-                }
-            }
-
+            Console.WriteLine("Reading data....");
+            DataIO.paramsInit(); //Đọc dữ liệu đầu vào và khởi tạo tham số
+            Console.WriteLine("Finish reading data");
             for (int seed = 30;seed <= 30; seed++)
             {
                 Params.random = new Random(seed);
+                MFEA solver = new MFEA();
+                Console.WriteLine("Runing....");
+                List<Individual> result = solver.run1();
 
-                MFEA_Population pop = new MFEA_Population(0);
-                pop.randomInit();
-                foreach(Individual indiv in pop.individuals)
+                for (int i = 0; i < result.Count; i++)
                 {
-                    indiv.printIndividual();
+                    result[i].printIndividual();
                 }
             }
         }

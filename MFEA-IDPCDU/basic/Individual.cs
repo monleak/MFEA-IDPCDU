@@ -60,7 +60,7 @@ namespace MFEA_IDPCDU.basic
         }
         public void printIndividual()
         {
-            Console.WriteLine("ID:"+this.Individual_Id+" Cost:"+cost);
+            Console.WriteLine("ID:"+this.Individual_Id+" Cost:"+cost+" Task:"+task);
             Console.Write("Priority: ");
             foreach (int i in this.Priority)
             {

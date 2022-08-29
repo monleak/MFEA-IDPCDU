@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MFEA_IDPCDU.basic;
+using MFEA_IDPCDU.Growing_Path_Algorithm;
+using MFEA_IDPCDU.util.mutation;
 
 namespace MFEA_IDPCDU.util.crossover
 {
@@ -20,8 +22,8 @@ namespace MFEA_IDPCDU.util.crossover
         public static List<Individual> runCrossover(Individual I1, Individual I2)
         {
             List<Individual> Offsprings = new List<Individual>();
-            Individual O1 = new Individual();
-            Individual O2 = new Individual();
+            Individual O1 = new Individual(I1.task);
+            Individual O2 = new Individual(I1.task);
 
             int cutPoint1 = Params.random.Next(0, Params.USS_N-1);
             int cutPoint2 = Params.random.Next(0, Params.USS_N-1);
@@ -114,6 +116,13 @@ namespace MFEA_IDPCDU.util.crossover
                 O1.Out_Edge_Index[i] = I2.Out_Edge_Index[i];
                 O2.Out_Edge_Index[i] = I1.Out_Edge_Index[i];
             }
+            if (Params.random.NextDouble() < Params.R_mutation)
+                O1 = mutation.mutation.runMutation(O1);
+            if (Params.random.NextDouble() < Params.R_mutation)
+                O2 = mutation.mutation.runMutation(O2);
+
+            O1.cost = GPA.calCost(GPA.runGPA(O1.Priority, O1.Out_Edge_Index, O1.task));
+            O2.cost = GPA.calCost(GPA.runGPA(O2.Priority, O2.Out_Edge_Index, O2.task));
 
             Offsprings.Add(O1);
             Offsprings.Add(O2);

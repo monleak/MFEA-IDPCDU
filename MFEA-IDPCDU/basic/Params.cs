@@ -21,6 +21,9 @@ namespace MFEA_IDPCDU.basic
         public static int MIN_POP_SIZE = 5; //Số cá thể tối thiểu mỗi tác vụ
         public static int MAX_EVALS_PER_TASK = 100000;
 
+        public static double R_mutation = 0.05;
+        public static double rmp = 0.5;
+
         public static List<Graph.Graph> List_graph = new List<Graph.Graph>();
 
         public static String DATA_SET1_PATH = "..\\..\\..\\..\\Data\\set1";

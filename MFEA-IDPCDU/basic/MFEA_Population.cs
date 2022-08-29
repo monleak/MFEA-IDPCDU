@@ -12,6 +12,7 @@ namespace MFEA_IDPCDU.basic
         public List<Individual> individuals; //Danh sách cá thể
         public Individual best; //Cá thể tốt nhất
         public int task;
+        public double[] rmp; //Tỉ lệ lai ghép liên tác vụ
 
         public MFEA_Population(int task)
         {
@@ -27,6 +28,8 @@ namespace MFEA_IDPCDU.basic
                 indiv.randomInit();
                 individuals.Add(indiv);
             }
+            rmp = new double[Params.List_graph.Count];
+            Array.Fill(this.rmp, 0.5);
         }
         public void update()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MFEA_IDPCDU.basic;
+using MFEA_IDPCDU.Growing_Path_Algorithm;
 
 namespace MFEA_IDPCDU.util.mutation
 {
@@ -20,6 +21,7 @@ namespace MFEA_IDPCDU.util.mutation
             a.Priority[j] = temp;
             a.Out_Edge_Index[i] = Params.random.Next(1, Params.USS_S[i]);
 
+            a.cost = GPA.calCost(GPA.runGPA(a.Priority, a.Out_Edge_Index, a.task));
             return a;
         }
     }
